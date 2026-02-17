@@ -185,8 +185,4 @@ public class UserInterface {
         int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         return (gp.screenWidth - length) / 2;
     }
-
-    private int getCenterImageY(BufferedImage image) {
-        return 0;
-    }
 }
