@@ -108,12 +108,12 @@ public class Player extends Entity {
 
             switch (objName) {
                 case "Dice":
-                    gp.playSound(2);
+                    gp.playSound(1);
                     gp.objs[index] = null;
                     gp.ui.addMessage("+1 Dice");
                     break;
                 case "Door":
-                    gp.playSound(2);
+                    gp.playSound(1);
                     gp.objs[index] = null;
                     gp.ui.addMessage("-1 Door");
                     break;
@@ -127,7 +127,7 @@ public class Player extends Entity {
             input.spaceHeld = false;
             idle = true;
             gp.npcs[index].speak();
-            gp.playSound(1);
+            gp.playSound(0);
         }
     }
 

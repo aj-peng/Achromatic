@@ -23,17 +23,17 @@ public class InputHandler implements KeyListener {
         if (gp.gameState == gp.titleState) {
             if (code == KeyEvent.VK_W) {
                 gp.ui.commandNum = Math.clamp(gp.ui.commandNum - 1, 0 , 2);
-                gp.playSound(1);
+                gp.playSound(0);
             }
             else if (code == KeyEvent.VK_S) {
                 gp.ui.commandNum = Math.clamp(gp.ui.commandNum + 1, 0 , 2);
-                gp.playSound(1);
+                gp.playSound(0);
             }
             else if (code == KeyEvent.VK_SPACE) {
                 if (gp.ui.commandNum == 0) {
                     gp.gameState = gp.playState;
-                    gp.playMusic(0);
-                    gp.playSound(1);
+                    gp.playMusic(5);
+                    gp.playSound(0);
                 }
                 else if (gp.ui.commandNum == 1) {
                     System.out.println("NEW GAME");
