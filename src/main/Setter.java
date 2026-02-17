@@ -3,7 +3,6 @@ package main;
 import entity.NPC_Blue;
 import object.OBJ_Dice;
 import object.OBJ_Door;
-import object.OBJ_Heart;
 
 public class Setter {
     GamePanel gp;
