@@ -18,6 +18,14 @@ public class Player extends Entity {
         screenX = (gp.screenWidth - gp.tileSize) / 2;
         screenY = (gp.screenHeight - gp.tileSize) / 2;
 
+        hitbox = new Rectangle();
+        hitbox.x = 12;
+        hitbox.y = 16;
+        hitbox.width = 24;
+        hitbox.height = 32;
+        hitboxDefaultX = hitbox.x;
+        hitboxDefaultY = hitbox.y;
+
         setDefaultValues();
         getPlayerImages();
     }
@@ -28,13 +36,9 @@ public class Player extends Entity {
         speed = 4;
         direction = "down";
 
-        hitbox = new Rectangle();
-        hitbox.x = 12;
-        hitbox.y = 16;
-        hitbox.width = 24;
-        hitbox.height = 32;
-        hitboxDefaultX = hitbox.x;
-        hitboxDefaultY = hitbox.y;
+        // PLAYER STATUS
+        maxHealth = 5;
+        health = maxHealth;
     }
 
     public void getPlayerImages() {

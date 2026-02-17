@@ -1,6 +1,10 @@
 package main;
 
+import object.OBJ_Heart;
+import object.SuperObject;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -17,6 +21,8 @@ public class UserInterface {
     public String dialogue = "";
     public int commandNum = 0;
 
+    BufferedImage heart;
+
     public UserInterface(GamePanel gp) {
         this.gp = gp;
 
@@ -26,6 +32,10 @@ public class UserInterface {
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
         }
+
+        // HUD
+        SuperObject heart = new OBJ_Heart(gp);
+        this.heart = heart.image;
     }
 
     public void draw(Graphics2D g2) {
@@ -39,12 +49,15 @@ public class UserInterface {
         }
         else if (gp.gameState == gp.playState) {
             drawMessage();
+            drawPlayerHealth();
         }
         else if (gp.gameState == gp.pauseState) {
             drawPauseMenu();
+            drawPlayerHealth();
         }
         else if (gp.gameState == gp.dialogueState) {
             drawDialogueMenu();
+            drawPlayerHealth();
         }
     }
 
@@ -86,6 +99,20 @@ public class UserInterface {
                 }
             }
         }
+    }
+
+    private void drawPlayerHealth() {
+        int x = gp.tileSize / 4;
+        int y = gp.tileSize / 2;
+        g2.drawImage(heart, x, y, null);
+
+        g2.setColor(Color.WHITE);
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 22F));
+        FontMetrics metrics = g2.getFontMetrics();
+        g2.drawString(gp.player.health + "/" + gp.player.maxHealth,
+                x + (gp.tileSize * 2 / 3),
+                y + (heart.getHeight() - metrics.getHeight()) / 2 + metrics.getAscent()
+        );
     }
 
     private void drawTitleMenu() {
@@ -157,5 +184,9 @@ public class UserInterface {
     private int getCenterTextX(String text) {
         int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         return (gp.screenWidth - length) / 2;
+    }
+
+    private int getCenterImageY(BufferedImage image) {
+        return 0;
     }
 }

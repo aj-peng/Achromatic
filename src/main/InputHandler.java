@@ -23,10 +23,11 @@ public class InputHandler implements KeyListener {
         if (gp.gameState == gp.titleState) {
             if (code == KeyEvent.VK_W) {
                 gp.ui.commandNum = Math.clamp(gp.ui.commandNum - 1, 0 , 2);
+                gp.playSound(1);
             }
             else if (code == KeyEvent.VK_S) {
                 gp.ui.commandNum = Math.clamp(gp.ui.commandNum + 1, 0 , 2);
-
+                gp.playSound(1);
             }
             else if (code == KeyEvent.VK_SPACE) {
                 if (gp.ui.commandNum == 0) {

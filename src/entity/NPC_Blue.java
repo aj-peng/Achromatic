@@ -46,7 +46,6 @@ public class NPC_Blue extends Entity {
         dialogues[0] = "I have nothing but my sorrow, and I want nothing more.";
         dialogues[1] = "Oh sorrow, I have ended, you see, by respecting you," +
                 "\nbecause I am certain you will never leave me.";
-
         dialogues[2] = "Ah, I realize it! Your beauty lies in the force of your being.";
     }
 
