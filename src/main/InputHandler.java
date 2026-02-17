@@ -32,8 +32,8 @@ public class InputHandler implements KeyListener {
             else if (code == KeyEvent.VK_SPACE) {
                 if (gp.ui.commandNum == 0) {
                     gp.gameState = gp.playState;
-                    gp.playMusic(5);
-                    gp.playSound(0);
+                    gp.playMusic(0);
+                    gp.playSound(1);
                 }
                 else if (gp.ui.commandNum == 1) {
                     System.out.println("NEW GAME");
