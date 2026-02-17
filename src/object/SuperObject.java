@@ -1,12 +1,14 @@
 package object;
 
 import main.GamePanel;
+import main.Utility;
 
 import java.awt.Rectangle;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public class SuperObject {
+    Utility utility = new Utility();
     public BufferedImage image;
     public String name;
     public int worldX, worldY;
@@ -19,7 +21,7 @@ public class SuperObject {
         int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
         if (gp.player.onScreen(worldX, worldY)) {
-            g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            g2.drawImage(image, screenX, screenY, null);
         }
     }
 }

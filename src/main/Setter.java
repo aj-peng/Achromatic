@@ -3,6 +3,7 @@ package main;
 import entity.NPC_Blue;
 import object.OBJ_Dice;
 import object.OBJ_Door;
+import object.OBJ_Heart;
 
 public class Setter {
     GamePanel gp;
@@ -12,11 +13,11 @@ public class Setter {
     }
 
     public void setObject() {
-        gp.objs[0] = new OBJ_Dice();
+        gp.objs[0] = new OBJ_Dice(gp);
         gp.objs[0].worldX = gp.tileSize * 2;
         gp.objs[0].worldY = gp.tileSize * 2;
 
-        gp.objs[1] = new OBJ_Door();
+        gp.objs[1] = new OBJ_Door(gp);
         gp.objs[1].worldX = gp.tileSize * 2;
         gp.objs[1].worldY = gp.tileSize * 4;
     }
