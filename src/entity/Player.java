@@ -99,6 +99,10 @@ public class Player extends Entity {
             // NPC INTERACTION
             int npcIndex = gp.collision.checkEntity(this, gp.npcs);
             interactNPC(npcIndex);
+
+            // EVENT INTERACTION
+            gp.event.checkEvent();
+            input.spaceHeld = false;
         }
     }
 
@@ -124,10 +128,9 @@ public class Player extends Entity {
     public void interactNPC(int index) {
         if (index != 999) {
             gp.gameState = gp.dialogueState;
-            input.spaceHeld = false;
-            idle = true;
             gp.npcs[index].speak();
             gp.playSound(1);
+            idle = true;
         }
     }
 
