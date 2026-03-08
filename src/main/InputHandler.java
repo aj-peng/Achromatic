@@ -29,7 +29,7 @@ public class InputHandler implements KeyListener {
         else if (gp.gameState == gp.dialogueState) {
             dialogueState(code);
         }
-        else if (code == KeyEvent.VK_BACK_QUOTE) {
+        if (code == KeyEvent.VK_BACK_QUOTE) {
             debug = !debug;
         }
     }
