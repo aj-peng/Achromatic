@@ -6,14 +6,14 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Event {
+public class EventHandler {
     GamePanel gp;
     Rectangle eventHitbox;
     int eventDefaultX, eventDefaultY;
 
     private final Map<Long, Node> events = new HashMap<>();
 
-    public Event(GamePanel gp) {
+    public EventHandler(GamePanel gp) {
         this.gp = gp;
 
         eventDefaultX = 23;

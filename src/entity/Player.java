@@ -24,8 +24,7 @@ public class Player extends Entity {
 
         setValues();
         setImages();
-        input.bindWASD(this::movement);
-        input.bindSpace(this::interact);
+        input.connect(this::move, this::interact);
     }
 
     public void update() {
@@ -78,6 +77,7 @@ public class Player extends Entity {
         switch (gp.gameState) {
             case PLAY -> {
                 gp.gameState = GamePanel.GameState.DIALOGUE;
+                gp.npcs[index].dialogueIndex = 0;
                 gp.npcs[index].speak();
                 gp.playSound(1);
                 idle = true;
@@ -89,16 +89,11 @@ public class Player extends Entity {
         }
     }
 
-    public boolean visible(int x, int y) {
-        return x + gp.tileSize > worldX - screenX && x - gp.tileSize < worldX + screenX &&
-                y + gp.tileSize > worldY - screenY && y - gp.tileSize < worldY + screenY;
-    }
-
-    private void movement() {
+    public void move() {
         direction = input.direction;
     }
 
-    private void interact() {
+    public void interact() {
         // NPC INTERACTION
         int npcIndex = gp.collision.checkEntity(this, gp.npcs);
         if (npcIndex != 999 && gp.npcs[npcIndex] != null) {
@@ -107,6 +102,11 @@ public class Player extends Entity {
         else {
             gp.event.checkEvent();
         }
+    }
+
+    public boolean visible(int x, int y) {
+        return x + gp.tileSize > worldX - screenX && x - gp.tileSize < worldX + screenX &&
+                y + gp.tileSize > worldY - screenY && y - gp.tileSize < worldY + screenY;
     }
 
     private void pickup(int index) {

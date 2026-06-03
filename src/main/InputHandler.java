@@ -4,16 +4,13 @@ import entity.Entity;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class InputHandler implements KeyListener {
     GamePanel gp;
 
-    private final List<Runnable> space = new ArrayList<>();
-    private final List<Runnable> wasd = new ArrayList<>();
+    private Runnable wasd, space;
     private final Set<Integer> debounce = new HashSet<>();
 
     public Entity.Direction direction;
@@ -21,6 +18,11 @@ public class InputHandler implements KeyListener {
 
     public InputHandler(GamePanel gp) {
         this.gp = gp;
+    }
+
+    public void connect(Runnable wasd, Runnable space) {
+        this.wasd = wasd;
+        this.space = space;
     }
 
     @Override
@@ -54,16 +56,8 @@ public class InputHandler implements KeyListener {
                 (code == KeyEvent.VK_A && direction == Entity.Direction.LEFT) ||
                 (code == KeyEvent.VK_D && direction == Entity.Direction.RIGHT)) {
             direction = Entity.Direction.NONE;
-            moving = false;
+            onWASD(false);
         }
-    }
-
-    public void bindWASD(Runnable listener) {
-        wasd.add(listener);
-    }
-
-    public void bindSpace(Runnable listener) {
-        space.add(listener);
     }
 
     private void titleState(int code) {
@@ -95,23 +89,19 @@ public class InputHandler implements KeyListener {
         switch (code) {
             case KeyEvent.VK_W -> {
                 direction = Entity.Direction.UP;
-                moving = true;
-                onWASD();
+                onWASD(true);
             }
             case KeyEvent.VK_S ->{
                 direction = Entity.Direction.DOWN;
-                moving = true;
-                onWASD();
+                onWASD(true);
             }
             case KeyEvent.VK_A -> {
                 direction = Entity.Direction.LEFT;
-                moving = true;
-                onWASD();
+                onWASD(true);
             }
             case KeyEvent.VK_D -> {
                 direction = Entity.Direction.RIGHT;
-                moving = true;
-                onWASD();
+                onWASD(true);
             }
             case KeyEvent.VK_SPACE -> onSpace();
             case KeyEvent.VK_ESCAPE -> {
@@ -144,22 +134,18 @@ public class InputHandler implements KeyListener {
     }
 
     private void dialogueState(int code) {
-        if (code == KeyEvent.VK_SPACE) {
-            onSpace();
+        switch (code) {
+            case KeyEvent.VK_SPACE -> onSpace();
+            case KeyEvent.VK_ESCAPE -> gp.gameState = GamePanel.GameState.PLAY;
         }
     }
 
-    private void onWASD() {
-        if (moving) {
-            for (Runnable listener : wasd) {
-                listener.run();
-            }
-        }
+    private void onWASD(boolean active) {
+        if (active) wasd.run();
+        moving = active;
     }
 
     private void onSpace() {
-        for (Runnable listener : space) {
-            listener.run();
-        }
+        space.run();
     }
 }
